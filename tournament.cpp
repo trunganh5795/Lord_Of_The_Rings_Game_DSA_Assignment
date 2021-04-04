@@ -3,6 +3,7 @@
 #define _definition_h_
 #endif
 
+
 //Arwen OK
 void Arwen(ringsignList *&head, int &size)
 {
@@ -219,7 +220,7 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 	int position = 1;
 	int sizeOfRingsignList = 1;
 	int b, levelOf;
-	for (pEvent; pEvent != NULL; pEvent = pEvent->pNext)
+	for (;pEvent != NULL; pEvent = pEvent->pNext)
 	{
 
 		// tính level của đối thủ position chính là i
@@ -398,11 +399,11 @@ int checkPalindrome(ringsignList *pRingsign)
 	int size = 0;
     ringsignList *start = pRingsign;
     ringsignList *end = pRingsign;
-    for (pRingsign; pRingsign != NULL; pRingsign = pRingsign->pNext)
+    for (; pRingsign != NULL; pRingsign = pRingsign->pNext)
     {
         size++;
     }
-    cout << "size: " << size << endl;
+    // cout << "size: " << size << endl;
     if (size == 0)
         return 0;
     // return size;
@@ -413,10 +414,9 @@ int checkPalindrome(ringsignList *pRingsign)
     // cout << "data end: " << end->data << endl;
     // if(start->data!=end->data)
     ///////////////////////
-    for (size; size > 1; size-=2)
+    for (; size > 1; size-=2)
     {
 
-		int a=0;
         // cout<<"size: "<<size<<endl;
         ringsignList *tmp = start;
         if (start == NULL)
@@ -429,9 +429,8 @@ int checkPalindrome(ringsignList *pRingsign)
             // cout << "1 element";
             return 1;
         }
-        for (tmp; tmp->pNext != end; tmp = tmp->pNext)
+        for (; tmp->pNext != end; tmp = tmp->pNext)
         {
-			a=1;
         }
         // cout<<"start->data: "<<start->nRingsign<<endl;
         // cout<<"tmp nRingsign: "<<tmp->pNext->nRingsign<<endl;

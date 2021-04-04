@@ -120,7 +120,7 @@ void display(knight theKnight, ringsignList *pList)
 	cout.flush();
 	// cout << theKnight.HP;
 	cout<<"checkPalindrome(pList): "<<checkPalindrome(pList)<<endl;
-	if (checkPalindrome(pList))
+	if (0)
 		cout << "God saves the Fellowship";
 	else
 	{
