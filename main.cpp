@@ -126,7 +126,7 @@ void display(knight theKnight, ringsignList *pList)
 	{
 		while (pList)
 		{
-			cout <<"RingSign List: "<< pList->nRingsign<<endl;
+			cout <<pList->nRingsign;
 			pList = pList->pNext;
 		}
 	}
@@ -169,5 +169,6 @@ int main(int argc, char *argv[])
 		pList = pList->pNext;
 		delete q;
 	  }
+	  	cout<<endl<<theKnight.HP;
 	return 0;
 }
