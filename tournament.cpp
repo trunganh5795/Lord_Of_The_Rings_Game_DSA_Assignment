@@ -7,9 +7,7 @@ Author : Truong Ngoc Trung Anh - 2020004
 DSA Assignment 2021
 Solved By me
 */
-
 //--------------SOLUTION ----------------------//
-
 //Arwen OK
 void Arwen(ringsignList *&head, int &size, int size2)
 {
@@ -22,7 +20,6 @@ void Arwen(ringsignList *&head, int &size, int size2)
 	{
 		if (head->nRingsign == 10)
 		{
-
 			ringsignList *tmp = new ringsignList();
 			tmp->nRingsign = 1;
 			tmp->pNext = head;
@@ -111,7 +108,6 @@ bool removeIteam(ringsignList *&head, ringsignList *&tail, int &item, int &size)
 		// cout << "null";
 		return 0;
 	}
-
 	if (head->nRingsign == item)
 	{
 		// cout << 123 << endl;
@@ -124,12 +120,10 @@ bool removeIteam(ringsignList *&head, ringsignList *&tail, int &item, int &size)
 		int index = 0;
 		for (int i = 0; i < size - 1; i++)
 		{
-
 			p = p->pNext;
 			// cout << "asda: " << p->nRingsign << " " << item << " ";
 			if (p->nRingsign == item)
 			{
-
 				index = i + 1;
 				removeAt(head, tail, index, size);
 				return 1;
@@ -138,30 +132,9 @@ bool removeIteam(ringsignList *&head, ringsignList *&tail, int &item, int &size)
 		return 0;
 	}
 	return 1;
-	///////////////////////////////////////////////////////////////////////////
-
-	// ringsignList *tmp = head;
-
-	// while (head->nRingsign == item)
-	// {
-	//     head = head->pNext;
-	// }
-	// while (tmp->pNext != NULL)
-	// {
-	//     if (tmp->pNext->nRingsign == item)
-	//     {
-	//         tmp->pNext = tmp->pNext->pNext;
-	//     }
-	//     else
-	//     {
-	//         tmp = tmp->pNext;
-	//     }
-	// }
-	// return 1;
 }
 void add(ringsignList *&head, ringsignList *&tail, int &item, int &size)
 {
-
 	ringsignList *tmp = new ringsignList();
 	if (size == 0)
 	{
@@ -218,10 +191,8 @@ void reverseList(ringsignList *&head, ringsignList *&tail)
 }
 ringsignList *combat(knight &theKnight, eventList *pEvent)
 {
-	int countttt = 0;
 	ringsignList *pList = NULL;
 	int initHP = theKnight.HP;
-	// int initHP = HP;
 	int level = theKnight.level;
 	int ringSign = theKnight.nInitRingsign;
 	pList = new ringsignList();
@@ -232,11 +203,10 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 	int b, levelOf;
 	for (; pEvent != NULL; pEvent = pEvent->pNext)
 	{
-		countttt++;
 		b = position % 10;
 		levelOf = position > 6 ? (b > 5 ? b : 5) : b;
 		int event = pEvent->nEventCode;
-		if (event == 0) //sự kiện bằng 0 thì kết thúc hành trình
+		if (event == 0 || head == NULL) //sự kiện bằng 0 thì kết thúc hành trình
 		{
 			return head;
 		}
@@ -244,7 +214,6 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 		{
 			if (event == 7)
 			{
-				// cout<<123<<endl;
 				pList->nRingsign += 1;
 				if (head->nRingsign == 0)
 				{
@@ -256,7 +225,7 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 				}
 				Arwen(head, sizeOfRingsignList, sizeOfRingsignList);
 			}
-			else //Trường hợp gặp 8
+			else
 			{
 				if (theKnight.HP != initHP)
 				{
@@ -264,6 +233,10 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 					if (initHP != 777 && initHP != 888)
 					{
 						removeAt(head, pList, sizeOfRingsignList - 1, sizeOfRingsignList);
+						////////////////////
+						if (head == NULL)
+							return head;
+						////////////////////
 					}
 					if (head == NULL)
 					{
@@ -278,7 +251,6 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 		}
 		else // trường hợp 1 2 3 4 5 6 9
 		{
-			// Asignif
 			int character, takeRingSign;
 			if (event < 10)
 			{
@@ -290,7 +262,6 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 				character = event / 10;
 				takeRingSign = event % 10;
 			}
-
 			if (level > levelOf)
 			{
 				if (character != 9) // trường hop 1 2 3 4 5 6
@@ -324,13 +295,12 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 				{
 					double baseDamage = getBaseDamge(character, levelOf);
 					theKnight.HP = theKnight.HP - baseDamage;
-					if (theKnight.HP <= 0)
+					if (theKnight.HP <= 0 || head == NULL)
 						return NULL;
 					if ((character == 4 || character == 9 || character == 5) && initHP != 777)
 					{
-						// cout<<"helllllllllllooooo";
 						if (character == 4)
-						{ 
+						{
 							int index = -1;
 							int indexOfX = -1;
 							for (ringsignList *tmp = head; tmp != NULL; tmp = tmp->pNext)
@@ -341,28 +311,26 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 									indexOfX = index;
 								}
 							}
-							// cout<<"indexOfX: "<<indexOfX<<endl;
 							if (indexOfX != -1)
 							{
 								removeAt(head, pList, indexOfX, sizeOfRingsignList);
 							}
 						}
 						else if (character == 5)
-						{
+						{ // thua 5
 							for (int i = 0; i < 3; i++)
 							{
+								if(head == NULL) return NULL;
 								removeAt(head, pList, 0, sizeOfRingsignList);
 							}
 						}
 						else
 						{
-
 							//thua 9
 							int loop = sizeOfRingsignList;
 							for (int i = 0; i < loop; i++)
 							{
-								// cout << position;
-								// cout<<endl<<loop<<endl;
+								if(head==NULL) return NULL;
 								bool result = removeIteam(head, pList, takeRingSign, sizeOfRingsignList);
 								if (!result)
 									break;
@@ -375,9 +343,6 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 					}
 					if (theKnight.HP <= 0)
 					{
-
-						cout << endl
-							 << "count: " << countttt << endl;
 						return head;
 					}
 				}
@@ -385,8 +350,6 @@ ringsignList *combat(knight &theKnight, eventList *pEvent)
 		}
 		position++;
 	}
-	cout << endl
-		 << "count: " << countttt << endl;
 	return head;
 }
 int checkPalindrome(ringsignList *pRingsign)
@@ -400,7 +363,6 @@ int checkPalindrome(ringsignList *pRingsign)
 	}
 	if (size == 0)
 		return 0;
-	// return size;
 	for (int i = 0; i < size - 1; i++)
 	{
 		end = end->pNext;
